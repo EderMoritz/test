@@ -2,6 +2,7 @@ package at.htlleonding;
 
 import at.htlleonding.control.ArztRepository;
 import at.htlleonding.entity.Arzt;
+import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
 
@@ -21,6 +22,14 @@ public class SomePage {
 
     private final Template page;
 
+    @CheckedTemplate
+    public static class Templates {
+        public static native TemplateInstance arzt(
+                String title,
+                List<Arzt> arztList
+        );
+    }
+
     @Inject
     ArztRepository arztRepository;
 
@@ -30,12 +39,12 @@ public class SomePage {
 
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance get(@QueryParam("name") String name) {
+    public String get(@QueryParam("name") String name) {
 
-        return page.data("name", name);
-        //List<Arzt> arztList = arztRepository.listAll();
+        //return page.data("name", name);
+        var arztList = arztRepository.listAll();
 
-        //return page.data(arztList);
+        return Templates.arzt("title", arztList).render();
     }
 
 }
