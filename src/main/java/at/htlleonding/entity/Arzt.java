@@ -1,6 +1,8 @@
 package at.htlleonding.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TEST_ARZT")
@@ -11,8 +13,12 @@ public class Arzt {
     @Column(name = "DOC_ID")
     private Long id;
     @Column(name = "DOC_NAME")
+    @NotEmpty
+    @NotNull
     private String name;
     @Column(name = "DOC_PROFESSION")
+    @NotEmpty
+    @NotNull
     private String profession;
 
     public Arzt() {

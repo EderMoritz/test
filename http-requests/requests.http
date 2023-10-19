@@ -1,1 +1,19 @@
 GET http://localhost:8080/hello
+
+###
+
+GET http://localhost:8080/api/arzt
+
+###
+
+POST http://localhost:8080/api/arzt
+Content-Type: application/json
+
+{
+  "name": "",
+  "profession": "chirurg"
+}
+
+###
+
+GET http://localhost:8080/api/arzt
